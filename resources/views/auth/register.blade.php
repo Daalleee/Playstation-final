@@ -5,7 +5,6 @@
 @section('content')
     <div class="auth-header">
         <h1 class="auth-title">Buat Akun Baru</h1>
-        <p class="auth-subtitle">Bergabunglah dengan kami dan mulai menyewa</p>
     </div>
 
     @if($errors->any())

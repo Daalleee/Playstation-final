@@ -5,7 +5,6 @@
 @section('content')
     <div class="auth-header">
         <h1 class="auth-title">Selamat Datang Kembali</h1>
-        <p class="auth-subtitle">Silakan login untuk mengakses sistem</p>
     </div>
 
     @if(session('status'))
