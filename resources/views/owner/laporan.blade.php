@@ -16,21 +16,17 @@
     </div>
 
     <!-- Filters -->
-    <div class="card border-0 shadow-sm mb-4" style="background: rgba(30, 41, 59, 0.7); border: 1px solid var(--card-border);">
-        <div class="card-body">
-            <form action="{{ route('pemilik.laporan_transaksi') }}" method="GET" class="row g-3 align-items-end">
-                <div class="col-md-4">
-                    <label class="form-label text-muted small">Dari Tanggal</label>
-                    <input type="date" name="dari" class="form-control bg-dark text-white border-secondary" value="{{ request('dari') }}">
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label text-muted small">Sampai Tanggal</label>
-                    <input type="date" name="sampai" class="form-control bg-dark text-white border-secondary" value="{{ request('sampai') }}">
-                </div>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary w-100"><i class="bi bi-filter me-2"></i>Terapkan Filter</button>
-                </div>
-            </form>
+    <div class="row g-3 align-items-end mb-4">
+        <div class="col-md-4">
+            <label class="form-label text-muted small">Dari Tanggal</label>
+            <input type="date" name="dari" class="form-control" style="background-color: white !important; color: black !important; border: 1px solid #ced4da;" value="{{ request('dari') }}">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label text-muted small">Sampai Tanggal</label>
+            <input type="date" name="sampai" class="form-control" style="background-color: white !important; color: black !important; border: 1px solid #ced4da;" value="{{ request('sampai') }}">
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary w-100"><i class="bi bi-filter me-2"></i>Terapkan Filter</button>
         </div>
     </div>
 
@@ -83,7 +79,18 @@
                                 <td class="px-4 py-3">
                                     @php $st = $rental->status; @endphp
                                     <span class="badge rounded-pill {{ $st==='selesai' || $st==='paid' ? 'bg-success-subtle text-success' : ($st==='active' || $st==='sedang_disewa' ? 'bg-primary-subtle text-primary' : ($st==='menunggu_konfirmasi' ? 'bg-warning-subtle text-warning' : 'bg-secondary-subtle text-secondary')) }}">
-                                        {{ ucfirst(str_replace('_', ' ', $st)) }}
+                                        {{
+                                            match($st) {
+                                                'active', 'sedang_disewa' => 'Sedang Disewa',
+                                                'paid' => 'Lunas',
+                                                'pending' => 'Menunggu',
+                                                'selesai' => 'Selesai',
+                                                'cancelled' => 'Dibatalkan',
+                                                'returned' => 'Dikembalikan',
+                                                'menunggu_konfirmasi' => 'Menunggu Konfirmasi',
+                                                default => ucfirst(str_replace('_', ' ', $st))
+                                            }
+                                        }}
                                     </span>
                                 </td>
                             </tr>

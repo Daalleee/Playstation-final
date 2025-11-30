@@ -48,7 +48,7 @@
     <li><a href="{{ route('pelanggan.cart.index') }}" class="{{ request()->routeIs('pelanggan.cart.*') ? 'active' : '' }}"><span class="dash-icon"><i class="bi bi-cart"></i></span> <span>Keranjang</span></a></li>
     <li><a href="{{ route('pelanggan.rentals.index') }}" class="{{ request()->routeIs('pelanggan.rentals.index') ? 'active' : '' }}"><span class="dash-icon"><i class="bi bi-clock-history"></i></span> <span>Riwayat Penyewaan</span></a></li>
   </ul>
-  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="dash-logout">
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="dash-logout" onsubmit="confirmLogoutPelanggan(event)">
     @csrf
     <button type="submit" class="btn btn-danger w-100"><span class="me-2"><i class="bi bi-box-arrow-right"></i></span> Logout</button>
   </form>
@@ -69,4 +69,28 @@
     const mq = window.matchMedia('(min-width: 992px)');
     mq.addEventListener ? mq.addEventListener('change', ()=>{ if(mq.matches) close(); }) : mq.addListener(()=>{ if(mq.matches) close(); });
   })();
+
+  // Pelanggan Logout Confirmation
+  function confirmLogoutPelanggan(event) {
+    event.preventDefault();
+    if (typeof Swal !== 'undefined') {
+      Swal.fire({
+        title: 'Yakin ingin keluar?',
+        text: 'Anda akan keluar dari sesi ini.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0652DD', // Primary color (blue)
+        cancelButtonColor: '#ef4444', // Danger color
+        confirmButtonText: 'Ya, Keluar',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById('logout-form').submit();
+        }
+      });
+    } else {
+      // Fallback to default behavior if SweetAlert2 is not available
+      document.getElementById('logout-form').submit();
+    }
+  }
 </script>

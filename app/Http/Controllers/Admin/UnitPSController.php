@@ -13,10 +13,33 @@ class UnitPSController extends Controller
     public function index()
     {
         Gate::authorize('access-admin');
-        $units = UnitPS::select('id', 'name', 'model', 'brand', 'serial_number', 'price_per_hour', 'stock', 'nama', 'merek', 'nomor_seri', 'harga_per_jam', 'stok', 'foto', 'kondisi')
+        $units = UnitPS::select('id', 'name', 'model', 'brand', 'serial_number', 'price_per_hour', 'stock', 'nama', 'merek', 'nomor_seri', 'harga_per_jam', 'stok', 'foto', 'kondisi', 'status')
             ->latest()
             ->withCount('rentalItems')
             ->paginate(10);
+
+        // Edit koleksi untuk menghitung status logis
+        $units->getCollection()->transform(function ($unit) {
+            $stok = $unit->stok ?? $unit->stock ?? 0;
+            $disewa = $unit->rental_items_count ?? 0;
+
+            // Jika status dari DB kosong atau null, maka hitung logis
+            if (empty($unit->status) || $unit->status === 'Tersedia') {
+                // Hanya ganti jika status dari DB adalah null/empty atau 'Tersedia'
+                if ($stok == 0) {
+                    $unit->status = 'Habis';
+                } elseif ($disewa >= $stok) {
+                    $unit->status = 'Disewa';
+                } else {
+                    // Jika status sebelumnya adalah 'Tersedia' atau kosong, tetap 'Tersedia'
+                    $unit->status = empty($unit->status) ? 'Tersedia' : $unit->status;
+                }
+            }
+            // Jika status dari DB bukan kosong dan bukan 'Tersedia', maka biarkan seperti itu (misalnya 'Maintenance')
+
+            return $unit;
+        });
+
         return view('admin.unitps.index', compact('units'));
     }
 

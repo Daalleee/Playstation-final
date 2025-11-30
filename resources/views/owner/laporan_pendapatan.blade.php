@@ -8,7 +8,7 @@
             <p class="text-muted mb-0">Analisis detail pendapatan bisnis Anda.</p>
         </div>
         <div class="d-flex gap-2">
-            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#filterModal">
+            <button class="btn btn-outline-light btn-sm date-filter-btn" data-bs-toggle="modal" data-bs-target="#filterModal">
                 <i class="bi bi-calendar-range me-2"></i>Filter Tanggal
             </button>
             <button class="btn btn-success btn-sm"><i class="bi bi-file-earmark-excel me-2"></i>Export Excel</button>
@@ -18,15 +18,15 @@
     <!-- Summary Cards -->
     <div class="row g-4 mb-4">
         <div class="col-12 col-md-3">
-            <div class="card border-0 shadow-sm h-100" style="background: rgba(30, 41, 59, 0.7); border: 1px solid var(--card-border);">
+            <div class="card border-0 shadow-sm h-100" style="background: white; border: 1px solid #dee2e6;">
                 <div class="card-body">
                     <p class="text-muted small mb-1">Total Pendapatan</p>
-                    <h4 class="fw-bold text-white mb-0">Rp {{ number_format($revenueStats['total'] ?? 0, 0, ',', '.') }}</h4>
+                    <h4 class="fw-bold text-success mb-0">Rp {{ number_format($revenueStats['total'] ?? 0, 0, ',', '.') }}</h4>
                 </div>
             </div>
         </div>
         <div class="col-12 col-md-3">
-            <div class="card border-0 shadow-sm h-100" style="background: rgba(30, 41, 59, 0.7); border: 1px solid var(--card-border);">
+            <div class="card border-0 shadow-sm h-100" style="background: white; border: 1px solid #dee2e6;">
                 <div class="card-body">
                     <p class="text-muted small mb-1">Hari Ini</p>
                     <h4 class="fw-bold text-success mb-0">+ Rp {{ number_format($revenueStats['today'] ?? 0, 0, ',', '.') }}</h4>
@@ -34,18 +34,18 @@
             </div>
         </div>
         <div class="col-12 col-md-3">
-            <div class="card border-0 shadow-sm h-100" style="background: rgba(30, 41, 59, 0.7); border: 1px solid var(--card-border);">
+            <div class="card border-0 shadow-sm h-100" style="background: white; border: 1px solid #dee2e6;">
                 <div class="card-body">
                     <p class="text-muted small mb-1">Bulan Ini</p>
-                    <h4 class="fw-bold text-info mb-0">Rp {{ number_format($revenueStats['month'] ?? 0, 0, ',', '.') }}</h4>
+                    <h4 class="fw-bold text-success mb-0">Rp {{ number_format($revenueStats['month'] ?? 0, 0, ',', '.') }}</h4>
                 </div>
             </div>
         </div>
         <div class="col-12 col-md-3">
-            <div class="card border-0 shadow-sm h-100" style="background: rgba(30, 41, 59, 0.7); border: 1px solid var(--card-border);">
+            <div class="card border-0 shadow-sm h-100" style="background: white; border: 1px solid #dee2e6;">
                 <div class="card-body">
                     <p class="text-muted small mb-1">{{ $periodLabel ?? '7 Hari Terakhir' }}</p>
-                    <h4 class="fw-bold text-primary mb-0">Rp {{ number_format($revenueStats['filtered'] ?? 0, 0, ',', '.') }}</h4>
+                    <h4 class="fw-bold text-success mb-0">Rp {{ number_format($revenueStats['filtered'] ?? 0, 0, ',', '.') }}</h4>
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
                                     {{ $payment->paid_at ? \Carbon\Carbon::parse($payment->paid_at)->format('d M Y H:i') : '-' }}
                                 </td>
                                 <td class="px-4 py-3">
-                                    <span class="font-monospace text-muted">#{{ $payment->id }}</span>
+                                    <span class="font-monospace text-muted">{{ $payment->id }}</span>
                                 </td>
                                 <td class="px-4 py-3 text-white">
                                     {{ $payment->rental->customer->name ?? '-' }}
@@ -120,33 +120,33 @@
     <!-- Date Filter Modal -->
     <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-white border-secondary">
+            <div class="modal-content bg-white text-dark border-secondary">
                 <div class="modal-header border-secondary">
                     <h5 class="modal-title" id="filterModalLabel">
                         <i class="bi bi-calendar-range me-2 text-primary"></i>Filter Tanggal
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(27%) sepia(94%) saturate(700%) hue-rotate(346deg) brightness(100%) contrast(92%);"></button>
                 </div>
                 <form method="GET" action="{{ route('pemilik.laporan_pendapatan') }}">
                     <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-12 col-md-6">
                                 <label for="dari" class="form-label text-muted small">Dari Tanggal</label>
-                                <input type="date" class="form-control bg-dark text-white border-secondary" 
+                                <input type="date" class="form-control bg-light text-dark border-secondary"
                                        id="dari" name="dari" value="{{ $dari ?? '' }}" required>
                             </div>
                             <div class="col-12 col-md-6">
                                 <label for="sampai" class="form-label text-muted small">Sampai Tanggal</label>
-                                <input type="date" class="form-control bg-dark text-white border-secondary" 
+                                <input type="date" class="form-control bg-light text-dark border-secondary"
                                        id="sampai" name="sampai" value="{{ $sampai ?? '' }}" required>
                             </div>
                         </div>
                         <div class="mt-3">
                             <p class="text-muted small mb-2">Quick Select:</p>
                             <div class="d-flex gap-2 flex-wrap">
-                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="setDateRange(7)">7 Hari</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="setDateRange(30)">30 Hari</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="setDateRange(90)">90 Hari</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="setDateRange(7)">7 Hari</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="setDateRange(30)">30 Hari</button>
+                                <button type="button" class="btn btn-sm btn-outline-primary" onclick="setDateRange(90)">90 Hari</button>
                             </div>
                         </div>
                     </div>
@@ -163,22 +163,67 @@
         </div>
     </div>
 
+    <style>
+        .date-filter-btn {
+            color: black !important;
+            border-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .date-filter-btn:hover {
+            color: black !important;
+            background-color: white;
+            border-color: black;
+        }
+
+        /* Default input behavior - black text on white background */
+        .form-control {
+            color: #212529; /* default black-ish text */
+        }
+
+        .form-control:focus {
+            color: #212529; /* keep black text when focused on main page */
+        }
+
+        /* Add class for when modal is open to make background white */
+        body.filter-modal-open {
+            background-color: white !important;
+        }
+
+        /* Red close button for modal */
+        .btn-close-red {
+            filter: invert(27%) sepia(94%) saturate(700%) hue-rotate(346deg) brightness(100%) contrast(92%) !important;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Quick date range selector
+        // Quick date range selector - make it available globally
         function setDateRange(days) {
             const today = new Date();
             const fromDate = new Date();
             fromDate.setDate(today.getDate() - (days - 1));
-            
+
             document.getElementById('dari').value = fromDate.toISOString().split('T')[0];
             document.getElementById('sampai').value = today.toISOString().split('T')[0];
         }
-        
+
+        // Add event listeners for modal open/close to change background
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterModal = document.getElementById('filterModal');
+
+            filterModal.addEventListener('show.bs.modal', function () {
+                document.body.classList.add('filter-modal-open');
+            });
+
+            filterModal.addEventListener('hidden.bs.modal', function () {
+                document.body.classList.remove('filter-modal-open');
+            });
+        });
+
+        // Initialize the chart
         document.addEventListener('DOMContentLoaded', function() {
             Chart.defaults.color = '#94a3b8';
             Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.1)';
-            
+
             const revCtx = document.getElementById('revChart');
             if (revCtx) {
                 new Chart(revCtx, {

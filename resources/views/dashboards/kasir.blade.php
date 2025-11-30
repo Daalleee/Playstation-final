@@ -26,7 +26,7 @@
                         <div>
                             <h6 class="card-title mb-0">Belum Lunas</h6>
                             <h2 class="my-2">{{ $unpaidCount }}</h2>
-                            <small class="text-white-50">Transaksi perlu pembayaran</small>
+                            <small class="text-dark">Transaksi perlu pembayaran</small>
                         </div>
                         <i class="bi bi-cash-coin fs-1 opacity-50"></i>
                     </div>
@@ -34,13 +34,13 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card bg-primary text-white h-100">
+            <div class="card bg-warning text-dark h-100">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h6 class="card-title mb-0">Sedang Disewa</h6>
                             <h2 class="my-2">{{ $activeCount }}</h2>
-                            <small class="text-white-50">Unit/Game sedang keluar</small>
+                            <small class="text-dark">Unit/Game sedang keluar</small>
                         </div>
                         <i class="bi bi-controller fs-1 opacity-50"></i>
                     </div>
@@ -54,7 +54,7 @@
                         <div>
                             <h6 class="card-title mb-0">Selesai Hari Ini</h6>
                             <h2 class="my-2">{{ $completedTodayCount }}</h2>
-                            <small class="text-white-50">Transaksi dikembalikan hari ini</small>
+                            <small class="text-dark">Transaksi dikembalikan hari ini</small>
                         </div>
                         <i class="bi bi-check-circle-fill fs-1 opacity-50"></i>
                     </div>
@@ -85,8 +85,8 @@
                 <tbody>
                     @forelse($rentals as $r)
                         <tr>
-                            <td><span class="font-monospace text-muted">#{{ $r->kode ?? $r->id }}</span></td>
-                            <td class="fw-bold">{{ $r->customer->name ?? '-' }}</td>
+                            <td><span class="font-monospace text-muted">{{ $r->kode ?? $r->id }}</span></td>
+                            <td>{{ $r->customer->name ?? '-' }}</td>
                             <td>
                                 @php $names = [];
                                     foreach ($r->items as $it) {
@@ -101,9 +101,9 @@
                                 @php
                                     $start = \Carbon\Carbon::parse($r->start_at);
                                     $end = \Carbon\Carbon::parse($r->due_at);
-                                    $diff = $start && $end ? $start->diffForHumans($end, [ 'parts'=>2, 'short'=>true, 'syntax'=>\Carbon\CarbonInterface::DIFF_ABSOLUTE ]) : '-';
+                                    $days = $start && $end ? $start->diffInDays($end) : 0;
                                 @endphp
-                                <span class="badge bg-secondary-subtle">{{ $diff }}</span>
+                                <span class="badge bg-secondary-subtle">{{ $days }} hari</span>
                             </td>
                             <td>
                                 @switch($r->status)
@@ -111,16 +111,33 @@
                                     @case('menunggu_konfirmasi')<span class="badge bg-warning-subtle">Menunggu Konfirmasi</span>@break
                                     @case('selesai')<span class="badge bg-success-subtle">Selesai</span>@break
                                     @case('cancelled')<span class="badge bg-danger-subtle">Dibatalkan</span>@break
-                                    @default <span class="badge bg-secondary-subtle">{{ ucfirst($r->status) }}</span>
+                                    @case('pending')<span class="badge bg-warning-subtle">Menunggu</span>@break
+                                    @case('active')<span class="badge bg-primary-subtle">Aktif</span>@break
+                                    @case('returned')<span class="badge bg-success-subtle">Dikembalikan</span>@break
+                                    @case('overdue')<span class="badge bg-danger-subtle">Terlambat</span>@break
+                                    @default
+                                        @php
+                                            $translations = [
+                                                'pending' => 'Menunggu',
+                                                'active' => 'Aktif',
+                                                'returned' => 'Dikembalikan',
+                                                'overdue' => 'Terlambat',
+                                                'cancelled' => 'Dibatalkan',
+                                                'completed' => 'Selesai',
+                                                'confirmed' => 'Dikonfirmasi'
+                                            ];
+                                            $statusText = $translations[strtolower($r->status)] ?? ucfirst($r->status);
+                                        @endphp
+                                        <span class="badge bg-secondary-subtle">{{ $statusText }}</span>
                                 @endswitch
                             </td>
                             <td>
                                 <div class="d-flex gap-2">
-                                    <a href="{{ route('kasir.transaksi.show', $r) }}" class="btn btn-sm btn-info text-white" title="Detail">
+                                    <a href="{{ route('kasir.transaksi.show', $r) }}" class="btn btn-sm btn-primary" title="Detail">
                                         <i class="bi bi-eye"></i>
                                     </a>
                                     @if($r->status == 'menunggu_konfirmasi')
-                                        <a href="{{ route('kasir.transaksi.show', $r) }}" class="btn btn-sm btn-warning text-dark" title="Konfirmasi Pengembalian">
+                                        <a href="{{ route('kasir.transaksi.show', $r) }}" class="btn btn-sm btn-primary" title="Konfirmasi Pengembalian">
                                             <i class="bi bi-check-circle"></i>
                                         </a>
                                     @endif

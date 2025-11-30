@@ -528,9 +528,9 @@
             @yield('sidebar_menu')
             
             <div class="mt-auto pt-4 border-top border-white border-opacity-10">
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('logout') }}" onsubmit="confirmLogout(event)">
                     @csrf
-                    <button class="nav-link w-100 text-start border-0 bg-transparent text-danger">
+                    <button type="submit" class="nav-link w-100 text-start border-0 bg-transparent text-danger">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Logout</span>
                     </button>
@@ -565,9 +565,9 @@
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bi bi-person me-2"></i> Profile</a></li>
                     <li>
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('logout') }}" onsubmit="confirmLogout(event)">
                             @csrf
-                            <button class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
+                            <button type="submit" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
                         </form>
                     </li>
                 </ul>
@@ -687,6 +687,53 @@
                 }
             });
             return false;
+        }
+
+        // Global Logout Confirmation Helper
+        function confirmLogout(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Yakin ingin keluar?',
+                text: 'Anda akan keluar dari sesi ini.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0652DD', // Primary color (blue)
+                cancelButtonColor: '#ef4444', // Danger color
+                confirmButtonText: 'Ya, Keluar',
+                cancelButtonText: 'Batal',
+                background: '#FFFFFF',
+                color: '#222222'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Find the form associated with this logout action and submit it
+                    const form = event.target.closest('form');
+                    if (form) {
+                        form.submit();
+                    }
+                }
+            });
+        }
+
+        // Logout confirmation for partial nav
+        function confirmLogoutPartial(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Yakin ingin keluar?',
+                text: 'Anda akan keluar dari sesi ini.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0652DD', // Primary color (blue)
+                cancelButtonColor: '#ef4444', // Danger color
+                confirmButtonText: 'Ya, Keluar',
+                cancelButtonText: 'Batal',
+                background: '#FFFFFF',
+                color: '#222222'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const form = event.target;
+                    form.submit();
+                }
+            });
         }
     </script>
     @yield('scripts')

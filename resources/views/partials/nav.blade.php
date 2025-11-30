@@ -28,7 +28,7 @@
         <a href="{{ $i['route'] }}">{{ $i['label'] }}</a>@if (!$loop->last) | @endif
     @endforeach
 
-    <form method="POST" action="{{ route('logout') }}" style="display:inline-block; margin-left: 1rem;">
+    <form method="POST" action="{{ route('logout') }}" style="display:inline-block; margin-left: 1rem;" onsubmit="confirmLogoutPartial(event)">
         @csrf
         <button type="submit">Logout</button>
     </form>

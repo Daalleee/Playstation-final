@@ -15,22 +15,22 @@
                 <div>
                     @switch($rental->status)
                         @case('pending')
-                            <span class="badge text-bg-warning text-dark">Menunggu</span>
+                            <span class="badge text-bg-primary">Menunggu</span>
                             @break
                         @case('paid')
-                            <span class="badge text-bg-success">Dibayar</span>
+                            <span class="badge text-bg-primary">Dibayar</span>
                             @break
                         @case('active')
                             <span class="badge text-bg-primary">Aktif</span>
                             @break
                         @case('returned')
-                            <span class="badge text-bg-secondary">Dikembalikan</span>
+                            <span class="badge text-bg-primary">Dikembalikan</span>
                             @break
                         @case('cancelled')
-                            <span class="badge text-bg-danger">Dibatalkan</span>
+                            <span class="badge text-bg-primary">Dibatalkan</span>
                             @break
                         @default
-                            <span class="badge text-bg-dark">{{ ucfirst($rental->status) }}</span>
+                            <span class="badge text-bg-primary">{{ ucfirst($rental->status) }}</span>
                     @endswitch
                 </div>
             </div>
@@ -85,7 +85,7 @@
             </div>
             <div class="d-flex justify-content-between">
                 <a href="{{ route('kasir.transaksi.index') }}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-success"><i class="bi bi-check2-circle me-1"></i> Konfirmasi Pengembalian</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-check2-circle me-1"></i> Konfirmasi Pengembalian</button>
             </div>
         </form>
     </div>

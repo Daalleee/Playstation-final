@@ -36,7 +36,7 @@
     <li><a href="{{ route('admin.accessories.index') }}"><span class="dash-icon"><i class="bi bi-plugin"></i></span> <span>Tambah Aksesoris</span></a></li>
     <li><a href="{{ route('admin.laporan') }}"><span class="dash-icon"><i class="bi bi-file-earmark-bar-graph"></i></span> <span>Laporan</span></a></li>
     <li>
-      <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();"><span class="dash-icon"><i class="bi bi-box-arrow-right"></i></span> <span>Logout</span></a>
+      <a href="#" onclick="confirmLogoutAdmin(event);"><span class="dash-icon"><i class="bi bi-box-arrow-right"></i></span> <span>Logout</span></a>
       <form id="logout-form-admin" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
     </li>
   </ul>
@@ -53,4 +53,28 @@
     overlay.addEventListener('click', close);
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
   })();
+
+  // Admin Logout Confirmation
+  function confirmLogoutAdmin(event) {
+    event.preventDefault();
+    if (typeof Swal !== 'undefined') {
+      Swal.fire({
+        title: 'Yakin ingin keluar?',
+        text: 'Anda akan keluar dari sesi ini.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0652DD', // Primary color (blue)
+        cancelButtonColor: '#ef4444', // Danger color
+        confirmButtonText: 'Ya, Keluar',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById('logout-form-admin').submit();
+        }
+      });
+    } else {
+      // Fallback to default behavior if SweetAlert2 is not available
+      document.getElementById('logout-form-admin').submit();
+    }
+  }
 </script>

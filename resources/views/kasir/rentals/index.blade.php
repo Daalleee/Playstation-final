@@ -11,7 +11,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h4 class="mb-1 fw-bold"><i class="bi bi-receipt me-2 text-primary icon-hover"></i><span class="gradient-text">Daftar Rental</span></h4>
+                    <h4 class="mb-1 fw-bold"><i class="bi bi-receipt me-2 text-dark icon-hover"></i><span class="gradient-text">Daftar Rental</span></h4>
                     <p class="mb-0 text-muted small">Kelola semua transaksi penyewaan</p>
                 </div>
                 <div>
@@ -56,34 +56,34 @@
                 </thead>
                 <tbody>
                     @forelse($rentals as $r)
-                    <tr class="{{ $r->status === 'menunggu_konfirmasi' ? 'table-warning' : '' }}">
-                        <td class="fw-bold text-white">{{ $r->kode ?? '#'.$r->id }}</td>
-                        <td class="text-white">{{ optional($r->customer)->name }}</td>
+                    <tr>
+                        <td>{{ $r->kode ?? $r->id }}</td>
+                        <td>{{ optional($r->customer)->name }}</td>
                         <td>
                             @php
                               $statusBadge = match($r->status) {
-                                'pending' => ['class' => 'bg-warning-subtle', 'text' => 'Menunggu Pembayaran'],
-                                'sedang_disewa' => ['class' => 'bg-success-subtle', 'text' => 'Sedang Disewa'],
-                                'menunggu_konfirmasi' => ['class' => 'bg-info-subtle', 'text' => '⚠️ Menunggu Konfirmasi'],
-                                'selesai' => ['class' => 'bg-primary-subtle', 'text' => 'Selesai'],
+                                'pending' => ['class' => 'bg-warning-subtle text-dark', 'text' => 'Menunggu Pembayaran'],
+                                'sedang_disewa' => ['class' => 'bg-primary-subtle', 'text' => 'Sedang Disewa'],
+                                'menunggu_konfirmasi' => ['class' => 'bg-warning-subtle text-dark', 'text' => 'Menunggu Konfirmasi'],
+                                'selesai' => ['class' => 'bg-success-subtle', 'text' => 'Selesai'],
                                 'cancelled' => ['class' => 'bg-danger-subtle', 'text' => 'Dibatalkan'],
                                 default => ['class' => 'bg-secondary-subtle', 'text' => ucfirst($r->status)]
                               };
                             @endphp
                             <span class="badge {{ $statusBadge['class'] }}">{{ $statusBadge['text'] }}</span>
                         </td>
-                        <td class="text-white fw-bold">Rp {{ number_format($r->total, 0, ',', '.') }}</td>
-                        <td class="text-white">Rp {{ number_format($r->paid ?? 0, 0, ',', '.') }}</td>
+                        <td>Rp {{ number_format($r->total, 0, ',', '.') }}</td>
+                        <td>Rp {{ number_format($r->paid ?? 0, 0, ',', '.') }}</td>
                         <td>
                             @if($r->paid >= $r->total)
-                                <span class="badge bg-success-subtle"><i class="bi bi-check-circle-fill me-1"></i> LUNAS</span>
+                                <span class="badge text-bg-success">LUNAS</span>
                             @elseif($r->paid > 0)
-                                <span class="badge bg-warning-subtle"><i class="bi bi-exclamation-circle me-1"></i> KURANG</span>
+                                <span class="badge text-bg-warning text-dark">KURANG</span>
                             @else
-                                <span class="badge bg-danger-subtle"><i class="bi bi-x-circle-fill me-1"></i> BELUM</span>
+                                <span class="badge text-bg-danger">BELUM</span>
                             @endif
                         </td>
-                        <td class="text-muted">{{ $r->created_at->format('d/m/Y') }}</td>
+                        <td>{{ $r->created_at->format('d/m/Y') }}</td>
                         <td>
                             <a href="{{ route('kasir.rentals.show', $r) }}" class="btn btn-sm btn-primary">
                                 <i class="bi bi-eye me-1"></i> Detail
@@ -93,7 +93,7 @@
                     @empty
                     <tr>
                         <td colspan="8" class="text-center py-5">
-                            <div class="text-muted opacity-75">
+                            <div class="text-muted">
                                 <i class="bi bi-inbox display-1 mb-3 d-block"></i>
                                 <h5 class="fw-bold">Tidak ada data rental</h5>
                                 <p class="mb-0">Belum ada transaksi rental yang tercatat</p>

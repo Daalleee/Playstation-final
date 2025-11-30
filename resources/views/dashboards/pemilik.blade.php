@@ -11,7 +11,6 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h2 class="fw-bold text-white mb-1">Dashboard Pemilik</h2>
-            <p class="text-muted mb-0">Ringkasan performa bisnis Anda hari ini.</p>
         </div>
     </div>
 
@@ -23,17 +22,16 @@
             <a href="{{ route('pemilik.status_produk') }}" class="text-decoration-none">
                 <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden hover-scale" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); transition: transform 0.3s;">
                     <div class="card-body position-relative z-1 text-white">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="d-flex justify-content-start align-items-start mb-3">
                             <div class="bg-white bg-opacity-25 rounded-3 p-2">
                                 <i class="bi bi-controller fs-4"></i>
                             </div>
-                            <span class="badge bg-white bg-opacity-25 rounded-pill">Lihat Detail <i class="bi bi-arrow-right ms-1"></i></span>
                         </div>
                         <h3 class="fw-bold mb-1">{{ $availableUnits ?? 0 }}</h3>
                         <p class="mb-0 opacity-75">Unit PS Tersedia</p>
                     </div>
-                    <div class="position-absolute bottom-0 end-0 mb-n3 me-n3 opacity-10">
-                        <i class="bi bi-controller" style="font-size: 8rem;"></i>
+                    <div class="position-absolute bottom-0 end-0 m-3">
+                        <span class="badge bg-white bg-opacity-25 rounded-pill">Lihat Detail <i class="bi bi-arrow-right ms-1"></i></span>
                     </div>
                 </div>
             </a>
@@ -44,17 +42,16 @@
             <a href="{{ route('pemilik.status_produk') }}" class="text-decoration-none">
                 <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden hover-scale" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); transition: transform 0.3s;">
                     <div class="card-body position-relative z-1 text-white">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="d-flex justify-content-start align-items-start mb-3">
                             <div class="bg-white bg-opacity-25 rounded-3 p-2">
                                 <i class="bi bi-disc fs-4"></i>
                             </div>
-                            <span class="badge bg-white bg-opacity-25 rounded-pill">Lihat Detail <i class="bi bi-arrow-right ms-1"></i></span>
                         </div>
                         <h3 class="fw-bold mb-1">{{ $availableGames ?? 0 }}</h3>
                         <p class="mb-0 opacity-75">Games Tersedia</p>
                     </div>
-                    <div class="position-absolute bottom-0 end-0 mb-n3 me-n3 opacity-10">
-                        <i class="bi bi-disc" style="font-size: 8rem;"></i>
+                    <div class="position-absolute bottom-0 end-0 m-3">
+                        <span class="badge bg-white bg-opacity-25 rounded-pill">Lihat Detail <i class="bi bi-arrow-right ms-1"></i></span>
                     </div>
                 </div>
             </a>
@@ -65,17 +62,16 @@
             <a href="{{ route('pemilik.status_produk') }}" class="text-decoration-none">
                 <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden hover-scale" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); transition: transform 0.3s;">
                     <div class="card-body position-relative z-1 text-white">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="d-flex justify-content-start align-items-start mb-3">
                             <div class="bg-white bg-opacity-25 rounded-3 p-2">
                                 <i class="bi bi-headset fs-4"></i>
                             </div>
-                            <span class="badge bg-white bg-opacity-25 rounded-pill">Lihat Detail <i class="bi bi-arrow-right ms-1"></i></span>
                         </div>
                         <h3 class="fw-bold mb-1">{{ $availableAccessories ?? 0 }}</h3>
                         <p class="mb-0 opacity-75">Aksesoris Tersedia</p>
                     </div>
-                    <div class="position-absolute bottom-0 end-0 mb-n3 me-n3 opacity-10">
-                        <i class="bi bi-headset" style="font-size: 8rem;"></i>
+                    <div class="position-absolute bottom-0 end-0 m-3">
+                        <span class="badge bg-white bg-opacity-25 rounded-pill">Lihat Detail <i class="bi bi-arrow-right ms-1"></i></span>
                     </div>
                 </div>
             </a>
@@ -86,17 +82,16 @@
             <a href="{{ route('pemilik.laporan_transaksi') }}" class="text-decoration-none">
                 <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden hover-scale" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); transition: transform 0.3s;">
                     <div class="card-body position-relative z-1 text-white">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="d-flex justify-content-start align-items-start mb-3">
                             <div class="bg-white bg-opacity-25 rounded-3 p-2">
                                 <i class="bi bi-receipt fs-4"></i>
                             </div>
-                            <span class="badge bg-white bg-opacity-25 rounded-pill">Lihat Laporan <i class="bi bi-arrow-right ms-1"></i></span>
                         </div>
                         <h3 class="fw-bold mb-1">{{ $todaysTransactions ?? 0 }}</h3>
                         <p class="mb-0 opacity-75">Transaksi Hari Ini</p>
                     </div>
-                    <div class="position-absolute bottom-0 end-0 mb-n3 me-n3 opacity-10">
-                        <i class="bi bi-receipt" style="font-size: 8rem;"></i>
+                    <div class="position-absolute bottom-0 end-0 m-3">
+                        <span class="badge bg-white bg-opacity-25 rounded-pill">Lihat Laporan <i class="bi bi-arrow-right ms-1"></i></span>
                     </div>
                 </div>
             </a>
@@ -107,17 +102,16 @@
             <a href="{{ route('pemilik.laporan_pendapatan') }}" class="text-decoration-none">
                 <div class="card h-100 border-0 shadow-sm position-relative overflow-hidden hover-scale" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); transition: transform 0.3s;">
                     <div class="card-body position-relative z-1 text-white">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="d-flex justify-content-start align-items-start mb-3">
                             <div class="bg-white bg-opacity-25 rounded-3 p-2">
                                 <i class="bi bi-cash-stack fs-4"></i>
                             </div>
-                            <span class="badge bg-white bg-opacity-25 rounded-pill">Analisis <i class="bi bi-arrow-right ms-1"></i></span>
                         </div>
                         <h3 class="fw-bold mb-1">Rp {{ number_format($revTotal7 ?? 0, 0, ',', '.') }}</h3>
                         <p class="mb-0 opacity-75">Pendapatan 7 Hari</p>
                     </div>
-                    <div class="position-absolute bottom-0 end-0 mb-n3 me-n3 opacity-10">
-                        <i class="bi bi-wallet2" style="font-size: 8rem;"></i>
+                    <div class="position-absolute bottom-0 end-0 m-3">
+                        <span class="badge bg-white bg-opacity-25 rounded-pill">Analisis <i class="bi bi-arrow-right ms-1"></i></span>
                     </div>
                 </div>
             </a>
@@ -177,7 +171,17 @@
                                 <td class="px-4 py-3">
                                     @php $st = $t->status ?? 'selesai'; @endphp
                                     <span class="badge rounded-pill {{ $st==='selesai' || $st==='paid' ? 'bg-success-subtle text-success' : ($st==='active' || $st==='ongoing' ? 'bg-primary-subtle text-primary' : ($st==='pending' ? 'bg-warning-subtle text-warning' : 'bg-secondary-subtle text-secondary')) }}">
-                                        {{ ucfirst($st) }}
+                                        {{
+                                            match($st) {
+                                                'active', 'ongoing' => 'Sedang Disewa',
+                                                'paid' => 'Lunas',
+                                                'pending' => 'Menunggu',
+                                                'selesai' => 'Selesai',
+                                                'cancelled' => 'Dibatalkan',
+                                                'returned' => 'Dikembalikan',
+                                                default => ucfirst($st)
+                                            }
+                                        }}
                                     </span>
                                 </td>
                             </tr>

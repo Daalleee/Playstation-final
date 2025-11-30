@@ -67,22 +67,22 @@
                 <tbody>
                     @forelse($unitps as $unit)
                         <tr>
-                            <td class="fw-bold">{{ $unit['nama'] }}</td>
+                            <td>{{ $unit['nama'] }}</td>  <!-- Hapus class fw-bold -->
                             <td>{{ $unit['model'] }}</td>
                             <td>{{ $unit['merek'] }}</td>
                             <td><span class="badge bg-secondary-subtle font-monospace">{{ $unit['nomor_seri'] }}</span></td>
                             <td class="text-center">{{ $unit['stok'] }}</td>
                             <td class="text-center">
-                                <span class="badge bg-success-subtle">{{ $unit['kondisi_baik'] }} Baik</span>
+                                <span class="text-dark">{{ $unit['kondisi_baik'] }} Baik</span>
                                 @if($unit['kondisi_buruk'] > 0)
-                                    <span class="badge bg-danger-subtle">{{ $unit['kondisi_buruk'] }} Rusak</span>
+                                    <span class="text-dark">{{ $unit['kondisi_buruk'] }} Rusak</span>
                                 @endif
                             </td>
                             <td class="text-center">
                                 @if($unit['disewa'] > 0)
-                                    <span class="badge bg-primary-subtle">{{ $unit['disewa'] }} Disewa</span>
+                                    <span class="text-dark">{{ $unit['disewa'] }} Disewa</span>
                                 @else
-                                    <span class="badge bg-secondary-subtle">Available</span>
+                                    <span class="text-dark">Tersedia</span>
                                 @endif
                             </td>
                         </tr>
@@ -117,18 +117,18 @@
                 <tbody>
                     @forelse($games as $game)
                         <tr>
-                            <td class="fw-bold">{{ $game['judul'] }}</td>
+                            <td>{{ $game['judul'] }}</td>  <!-- Hapus class fw-bold -->
                             <td><span class="badge bg-secondary-subtle">{{ $game['platform'] }}</span></td>
                             <td>{{ $game['genre'] }}</td>
                             <td class="text-center">{{ $game['stok'] }}</td>
                             <td class="text-center">
-                                <span class="badge bg-success-subtle">{{ $game['kondisi_baik'] }} Baik</span>
+                                <span class="text-dark">{{ $game['kondisi_baik'] }} Baik</span>
                             </td>
                             <td class="text-center">
                                 @if($game['disewa'] > 0)
-                                    <span class="badge bg-primary-subtle">{{ $game['disewa'] }} Disewa</span>
+                                    <span class="text-dark">{{ $game['disewa'] }} Disewa</span>
                                 @else
-                                    <span class="badge bg-secondary-subtle">Available</span>
+                                    <span class="text-dark">Tersedia</span>
                                 @endif
                             </td>
                         </tr>
@@ -162,17 +162,17 @@
                 <tbody>
                     @forelse($accessories as $acc)
                         <tr>
-                            <td class="fw-bold">{{ $acc['nama'] }}</td>
+                            <td>{{ $acc['nama'] }}</td>  <!-- Hapus class fw-bold -->
                             <td>{{ $acc['jenis'] }}</td>
                             <td class="text-center">{{ $acc['stok'] }}</td>
                             <td class="text-center">
-                                <span class="badge bg-success-subtle">{{ $acc['kondisi_baik'] }} Baik</span>
+                                <span class="text-dark">{{ $acc['kondisi_baik'] }} Baik</span>
                             </td>
                             <td class="text-center">
                                 @if($acc['disewa'] > 0)
-                                    <span class="badge bg-primary-subtle">{{ $acc['disewa'] }} Disewa</span>
+                                    <span class="text-dark">{{ $acc['disewa'] }} Disewa</span>
                                 @else
-                                    <span class="badge bg-secondary-subtle">Available</span>
+                                    <span class="text-dark">Tersedia</span>
                                 @endif
                             </td>
                         </tr>

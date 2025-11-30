@@ -66,8 +66,8 @@
         <div class="col-12 col-lg-6">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-transparent border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
-                    <h5 class="fw-bold text-white mb-0"><i class="bi bi-disc me-2 text-info"></i>Games</h5>
-                    <span class="badge bg-info bg-opacity-10 text-info">{{ count($games) }} Total</span>
+                    <h5 class="fw-bold text-white mb-0"><i class="bi bi-disc me-2 text-dark"></i>Games</h5>
+                    <span class="badge bg-primary bg-opacity-10 text-primary">{{ count($games) }} Total</span>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive" style="max-height: 400px;">
@@ -98,7 +98,7 @@
                                             @if($isRented)
                                                 <span class="badge bg-warning-subtle text-warning rounded-pill">Disewa</span>
                                             @else
-                                                <span class="badge bg-success-subtle text-success rounded-pill">Ada</span>
+                                                <span class="badge bg-success-subtle text-success rounded-pill">Tersedia</span>
                                             @endif
                                         </td>
                                     </tr>
@@ -116,8 +116,8 @@
         <div class="col-12 col-lg-6">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-header bg-transparent border-0 pt-4 px-4 d-flex justify-content-between align-items-center">
-                    <h5 class="fw-bold text-white mb-0"><i class="bi bi-headset me-2 text-warning"></i>Aksesoris</h5>
-                    <span class="badge bg-warning bg-opacity-10 text-warning">{{ count($accessories) }} Total</span>
+                    <h5 class="fw-bold text-white mb-0"><i class="bi bi-headset me-2 text-dark"></i>Aksesoris</h5>
+                    <span class="badge bg-primary bg-opacity-10 text-primary">{{ count($accessories) }} Total</span>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive" style="max-height: 400px;">
@@ -148,7 +148,7 @@
                                             @if($isRented)
                                                 <span class="badge bg-warning-subtle text-warning rounded-pill">Disewa</span>
                                             @else
-                                                <span class="badge bg-success-subtle text-success rounded-pill">Ada</span>
+                                                <span class="badge bg-success-subtle text-success rounded-pill">Tersedia</span>
                                             @endif
                                         </td>
                                     </tr>

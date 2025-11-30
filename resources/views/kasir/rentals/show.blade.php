@@ -6,8 +6,8 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h4 class="mb-0 text-white">
-                <i class="bi bi-receipt me-2 text-primary"></i>Detail Transaksi
-                <span class="text-muted fs-6 ms-2">#{{ $rental->kode ?? $rental->id }}</span>
+                <i class="bi bi-receipt me-2 text-dark"></i>Detail Transaksi
+                <span class="text-muted fs-6 ms-2">ID: {{ $rental->kode ?? $rental->id }}</span>
             </h4>
         </div>
         <a href="{{ route('kasir.rentals.index') }}" class="btn btn-sm rounded-pill px-3" style="color: #0652DD; border: 1px solid #0652DD; background-color: transparent;" onmouseover="this.style.backgroundColor='#0652DD'; this.style.color='white';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#0652DD';">
@@ -34,7 +34,7 @@
         <div class="col-lg-8 mb-4">
             <!-- Items Card -->
             <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header bg-dark text-white py-3">
+                <div class="card-header bg-white text-dark py-3">
                     <h6 class="mb-0"><i class="bi bi-cart-check me-2"></i>Item Sewa</h6>
                 </div>
                 <div class="card-body p-0">
@@ -53,7 +53,7 @@
                                 @foreach($rental->items as $item)
                                     <tr>
                                         <td>
-                                            <div class="fw-bold text-white">
+                                            <div class="fw-bold">
                                                 {{ $item->rentable->nama ?? $item->rentable->judul ?? $item->rentable->name ?? 'Item Terhapus' }}
                                             </div>
                                             <small class="text-muted">ID: {{ $item->rentable_id }}</small>
@@ -82,19 +82,19 @@
 
             <!-- Payment Card -->
             <div class="card border-0 shadow-sm">
-                <div class="card-header bg-success text-white py-3">
+                <div class="card-header bg-white text-dark py-3">
                     <h6 class="mb-0"><i class="bi bi-cash-stack me-2"></i>Rincian Pembayaran</h6>
                 </div>
                 <div class="card-body">
                     <div class="row g-4">
                         <div class="col-md-6">
-                            <div class="p-3 rounded bg-dark border border-secondary border-opacity-25">
+                            <div class="p-3 rounded bg-white border border-secondary border-opacity-25">
                                 <small class="text-muted d-block mb-1">Total Tagihan</small>
-                                <h4 class="text-white mb-0">Rp {{ number_format($rental->total, 0, ',', '.') }}</h4>
+                                <h4 class="text-dark mb-0">Rp {{ number_format($rental->total, 0, ',', '.') }}</h4>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="p-3 rounded bg-dark border border-secondary border-opacity-25">
+                            <div class="p-3 rounded bg-white border border-secondary border-opacity-25">
                                 <small class="text-muted d-block mb-1">Sudah Dibayar</small>
                                 <h4 class="text-success mb-0">Rp {{ number_format($rental->paid, 0, ',', '.') }}</h4>
                             </div>
@@ -102,10 +102,10 @@
                     </div>
 
                     <div class="mt-4">
-                        <h6 class="fw-bold mb-3 text-white">Status Pembayaran</h6>
+                        <h6 class="fw-bold mb-3 text-dark">Status Pembayaran</h6>
                         @if($rental->paid >= $rental->total)
                             <div class="alert alert-success d-flex align-items-center mb-0 border-0 bg-success-subtle text-success">
-                                <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                                <i class="bi bi-check-circle-fill fs-4 me-3 text-success"></i>
                                 <div>
                                     <div class="fw-bold">LUNAS</div>
                                     <small>Seluruh tagihan telah dibayarkan.</small>
@@ -137,6 +137,9 @@
         <div class="col-lg-4">
             <!-- Status Action Card -->
             <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white text-dark py-3">
+                    <h6 class="mb-0"><i class="bi bi-gear me-2"></i>Status Aksi</h6>
+                </div>
                 <div class="card-body text-center p-4">
                     <div class="mb-3">
                         @switch($rental->status)
@@ -180,8 +183,8 @@
 
             <!-- Customer Info -->
             <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header bg-transparent border-bottom border-secondary border-opacity-25 py-3">
-                    <h6 class="mb-0 text-white"><i class="bi bi-person me-2"></i>Pelanggan</h6>
+                <div class="card-header bg-white border-bottom border-secondary border-opacity-25 py-3">
+                    <h6 class="mb-0 text-dark"><i class="bi bi-person me-2"></i>Pelanggan</h6>
                 </div>
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
@@ -189,37 +192,37 @@
                             {{ substr($rental->customer->name ?? '?', 0, 1) }}
                         </div>
                         <div>
-                            <h6 class="mb-0 text-white">{{ $rental->customer->name ?? 'Guest' }}</h6>
+                            <h6 class="mb-0 text-dark">{{ $rental->customer->name ?? 'Guest' }}</h6>
                             <small class="text-muted">{{ $rental->customer->email ?? '-' }}</small>
                         </div>
                     </div>
                     <div class="mb-2">
                         <small class="text-muted d-block">Telepon</small>
-                        <span class="text-white">{{ $rental->customer->phone ?? '-' }}</span>
+                        <span class="text-dark">{{ $rental->customer->phone ?? '-' }}</span>
                     </div>
                     <div>
                         <small class="text-muted d-block">Alamat</small>
-                        <span class="text-white">{{ $rental->customer->address ?? '-' }}</span>
+                        <span class="text-dark">{{ $rental->customer->address ?? '-' }}</span>
                     </div>
                 </div>
             </div>
 
             <!-- Timeline -->
             <div class="card border-0 shadow-sm">
-                <div class="card-header bg-transparent border-bottom border-secondary border-opacity-25 py-3">
-                    <h6 class="mb-0 text-white"><i class="bi bi-calendar-event me-2"></i>Waktu Sewa</h6>
+                <div class="card-header bg-white border-bottom border-secondary border-opacity-25 py-3">
+                    <h6 class="mb-0 text-dark"><i class="bi bi-calendar-event me-2"></i>Waktu Sewa</h6>
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
                         <small class="text-muted d-block">Mulai Sewa</small>
-                        <div class="d-flex align-items-center text-white">
+                        <div class="d-flex align-items-center text-dark">
                             <i class="bi bi-calendar-check me-2 text-primary"></i>
                             {{ $rental->start_at ? \Carbon\Carbon::parse($rental->start_at)->format('d M Y, H:i') : '-' }}
                         </div>
                     </div>
                     <div class="mb-3">
                         <small class="text-muted d-block">Jatuh Tempo</small>
-                        <div class="d-flex align-items-center text-white">
+                        <div class="d-flex align-items-center text-dark">
                             <i class="bi bi-calendar-x me-2 text-danger"></i>
                             {{ $rental->due_at ? \Carbon\Carbon::parse($rental->due_at)->format('d M Y, H:i') : '-' }}
                         </div>

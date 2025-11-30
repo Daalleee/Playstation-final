@@ -39,6 +39,7 @@
                         <th>Kode</th>
                         <th>Pelanggan</th>
                         <th>Status</th>
+                        <th>Pembayaran</th>
                         <th class="text-end">Total</th>
                         <th>Aksi</th>
                     </tr>
@@ -49,28 +50,41 @@
                         <td>{{ $r->kode ?? $r->id }}</td>
                         <td>{{ $r->customer->name ?? '-' }}</td>
                         <td>
-                            @switch($r->status)
-                                @case('pending')
-                                    <span class="badge text-bg-warning text-dark">Menunggu</span>
-                                    @break
-                                @case('paid')
-                                    <span class="badge text-bg-success">Dibayar</span>
-                                    @break
-                                @case('active')
-                                    <span class="badge text-bg-primary">Aktif</span>
-                                    @break
-                                @case('returned')
-                                    <span class="badge text-bg-secondary">Dikembalikan</span>
-                                    @break
-                                @case('cancelled')
-                                    <span class="badge text-bg-danger">Dibatalkan</span>
-                                    @break
-                                @default
-                                    <span class="badge text-bg-dark">{{ ucfirst($r->status) }}</span>
-                            @endswitch
+                            @php
+                                $statusText = match($r->status) {
+                                    'pending' => 'Menunggu Pembayaran',
+                                    'paid' => 'Dibayar',
+                                    'active' => 'Sedang Disewa',
+                                    'returned' => 'Selesai',
+                                    'cancelled' => 'Dibatalkan',
+                                    default => ucfirst($r->status)
+                                };
+                            @endphp
+                            @if($r->status === 'pending')
+                                <span class="badge text-bg-warning text-dark">Menunggu Pembayaran</span>
+                            @elseif($r->status === 'paid')
+                                <span class="badge text-bg-success">Dibayar</span>
+                            @elseif($r->status === 'active')
+                                <span class="badge text-bg-primary">Sedang Disewa</span>
+                            @elseif($r->status === 'returned')
+                                <span class="badge text-bg-success">Selesai</span>
+                            @elseif($r->status === 'cancelled')
+                                <span class="badge text-bg-danger">Dibatalkan</span>
+                            @else
+                                <span class="badge text-bg-secondary">{{ ucfirst($r->status) }}</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($r->paid >= $r->total)
+                                <span class="badge text-bg-success">LUNAS</span>
+                            @elseif($r->paid > 0)
+                                <span class="badge text-bg-warning text-dark">KURANG</span>
+                            @else
+                                <span class="badge text-bg-danger">BELUM</span>
+                            @endif
                         </td>
                         <td class="text-end">Rp {{ number_format($r->total,0,',','.') }}</td>
-                        <td><a href="{{ route('kasir.transaksi.show', $r) }}" class="btn btn-light btn-sm">Detail</a></td>
+                        <td><a href="{{ route('kasir.transaksi.show', $r) }}" class="btn btn-sm btn-primary">Detail</a></td>
                     </tr>
                 @endforeach
                 </tbody>

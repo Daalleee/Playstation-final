@@ -6,7 +6,7 @@
 
 @section('sidebar_menu')
     <a href="{{ route('dashboard.pemilik') }}" class="nav-link {{ request()->routeIs('dashboard.pemilik') ? 'active' : '' }}">
-        <i class="bi bi-grid-1x2"></i>
+        <i class="bi bi-grid"></i>
         <span>Beranda</span>
     </a>
     
