@@ -21,16 +21,12 @@
 </head>
 <body class="auth-page">
     <div class="auth-container">
-        <!-- Logo Header -->
-        <div class="auth-logo-header">
-            <div class="auth-brand">
+        <!-- Centered Form Card -->
+        <div class="auth-card">
+            <div class="auth-brand-form">
                 <i class="fa-brands fa-playstation"></i>
-                <h2>RENTAL PS</h2>
+                <h2>PlayStation</h2>
             </div>
-        </div>
-
-        <!-- Form Content -->
-        <div class="auth-form-content">
             @yield('content')
         </div>
     </div>

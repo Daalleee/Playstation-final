@@ -4,6 +4,10 @@
 
 @section('header_title', 'PlayStation')
 
+@push('styles')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endpush
+
 @section('sidebar_menu')
     <a href="{{ route('dashboard.pelanggan') }}" class="nav-link {{ request()->routeIs('dashboard.pelanggan') ? 'active' : '' }}" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Beranda">
         <i class="bi bi-grid"></i>
@@ -239,6 +243,7 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize Bootstrap Tooltips
@@ -273,6 +278,34 @@
             });
         }
 
+        // Function to show flash messages (success/error)
+        window.showFlashMessage = function(message, type = 'success') {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            Toast.fire({
+                icon: type,
+                title: message
+            });
+        };
+
+        // Check for flash messages on page load
+        @if(session('success'))
+            window.showFlashMessage('{{ session('success') }}', 'success');
+        @endif
+
+        @if(session('error'))
+            window.showFlashMessage('{{ session('error') }}', 'error');
+        @endif
     });
 </script>
 @endpush

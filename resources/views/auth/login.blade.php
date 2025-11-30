@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="auth-header">
-        <h1 class="auth-title">Selamat Datang Kembali</h1>
+        <h1 class="auth-title">Selamat Datang</h1>
     </div>
 
     @if(session('status'))
@@ -25,7 +25,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('login.post') }}">
+    <form method="POST" action="{{ route('login.post') }}" class="login-form">
         @csrf
         
         <div class="form-group">
@@ -77,7 +77,7 @@
             <a href="{{ route('password.request') }}" class="auth-link">Lupa Password?</a>
         </div>
 
-        <button type="submit" class="btn-auth btn-primary-auth">
+        <button type="submit" class="btn-auth btn-primary-auth btn-login">
             <span>Login</span>
             <i class="fas fa-arrow-right"></i>
         </button>

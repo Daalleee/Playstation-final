@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="auth-header">
-        <h1 class="auth-title">Buat Akun Baru</h1>
+        <h1 class="auth-title">Buat Akun</h1>
     </div>
 
     @if($errors->any())
@@ -18,7 +18,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('register.post') }}">
+    <form method="POST" action="{{ route('register.post') }}" class="register-form">
         @csrf
         
         <div class="form-group">
@@ -151,7 +151,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn-auth btn-primary-auth">
+        <button type="submit" class="btn-auth btn-primary-auth btn-register">
             <span>Daftar Sekarang</span>
             <i class="fas fa-user-plus"></i>
         </button>

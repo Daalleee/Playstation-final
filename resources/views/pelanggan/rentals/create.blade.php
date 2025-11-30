@@ -140,7 +140,7 @@
                             </a>
                             @if(!$cartItems->isEmpty())
                                 @php $firstItem = $cartItems->first(); @endphp
-                                <form method="POST" action="{{ route('pelanggan.cart.add') }}" class="flex-fill">
+                                <form id="add-to-cart-form" method="POST" action="{{ route('pelanggan.cart.add') }}" class="flex-fill">
                                     @csrf
                                     @if(is_array($firstItem))
                                         <input type="hidden" name="type" value="{{ $firstItem['type'] }}">
@@ -153,8 +153,9 @@
                                         <input type="hidden" name="price_type" value="{{ $firstItem->price_type }}">
                                         <input type="hidden" name="quantity" value="{{ $firstItem->quantity }}">
                                     @endif
-                                    <button type="submit" class="btn btn-primary w-100">
-                                        <i class="bi bi-cart-plus me-1"></i> Tambah ke Keranjang
+                                    <button type="button" class="btn btn-primary w-100" onclick="addToCart()">
+                                        <span id="cart-button-text"><i class="bi bi-cart-plus me-1"></i> Tambah ke Keranjang</span>
+                                        <span id="cart-button-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                     </button>
                                 </form>
                             @endif
@@ -279,4 +280,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<script>
+function addToCart() {
+    const form = document.getElementById('add-to-cart-form');
+    const formData = new FormData(form);
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    // Show loading state
+    document.getElementById('cart-button-text').classList.add('d-none');
+    document.getElementById('cart-button-spinner').classList.remove('d-none');
+    const submitButton = form.querySelector('button[type="button"]');
+    submitButton.disabled = true;
+
+    fetch('{{ route("pelanggan.cart.add") }}', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': csrfToken,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            if(window.showFlashMessage) {
+                window.showFlashMessage(data.message, 'success');
+            } else {
+                alert(data.message);
+            }
+
+            // Optional: Update cart count or page content if needed
+            // You might want to reload specific parts of the page here
+        } else {
+            if(window.showFlashMessage) {
+                window.showFlashMessage(data.message || 'Gagal menambahkan ke keranjang', 'error');
+            } else {
+                alert(data.message || 'Gagal menambahkan ke keranjang');
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        if(window.showFlashMessage) {
+            window.showFlashMessage('Terjadi kesalahan saat menambahkan ke keranjang', 'error');
+        } else {
+            alert('Terjadi kesalahan saat menambahkan ke keranjang');
+        }
+    })
+    .finally(() => {
+        // Reset button state
+        document.getElementById('cart-button-text').classList.remove('d-none');
+        document.getElementById('cart-button-spinner').classList.add('d-none');
+        submitButton.disabled = false;
+    });
+}
+</script>
+
 @endsection
