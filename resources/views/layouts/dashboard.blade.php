@@ -30,8 +30,8 @@
             --warning: #eab308;       /* Yellow 500 */
             --danger: #ef4444;        /* Red 500 */
 
-            --sidebar-width: 260px;
-            --sidebar-collapsed-width: 80px;
+            --sidebar-width: 230px; /* Kurangi lebar sidebar */
+            --sidebar-collapsed-width: 70px;
             --header-height: 70px;
         }
 
@@ -76,33 +76,33 @@
         }
 
         .sidebar-header {
-            height: var(--header-height);
+            height: calc(var(--header-height) - 8px); /* Kurangi sedikit tinggi header */
             display: flex;
             align-items: center;
-            padding: 0 1.5rem;
+            padding: 0 0.8rem; /* Kurangi padding */
             white-space: nowrap;
             background: inherit; /* Uses the same background as sidebar */
         }
 
         .logo-icon {
-            min-width: 36px;
-            height: 36px;
+            min-width: 28px;
+            height: 28px;
             background: #0652DD;
-            border-radius: 10px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
-            margin-right: 12px;
+            font-size: 1rem;
+            margin-right: 8px;
             box-shadow: none;
         }
 
         .logo-text {
             font-weight: 800;
-            font-size: 1.4rem;
+            font-size: 1.1rem; /* Kurangi ukuran font lebih jauh */
             color: white;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.4px;
             opacity: 1;
             transition: opacity 0.2s;
         }
@@ -115,23 +115,30 @@
 
         .sidebar-menu {
             flex: 1;
-            padding: 1.5rem 1rem;
+            padding: 0.8rem 1rem; /* Kurangi padding lebih jauh */
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.2rem; /* Kurangi jarak antar menu lebih jauh */
         }
 
         .nav-link {
             display: flex;
             align-items: center;
-            padding: 0.9rem 1rem;
+            padding: 0.4rem 1rem; /* Kurangi padding vertikal lebih jauh */
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 10px; /* Kurangi border radius */
             transition: all 0.2s ease;
             white-space: nowrap;
             font-weight: 500;
+            font-size: 0.9rem; /* Sedikit kecilkan ukuran font */
+            margin: 0; /* Pastikan tidak ada margin tambahan */
+        }
+
+        /* Tambahkan override lebih kuat untuk semua menu item */
+        .sidebar-menu .nav-link {
+            margin-bottom: 0 !important;
         }
 
         .nav-link:hover {
@@ -176,11 +183,11 @@
             color: #E5E7EB;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
+            font-size: 0.6rem; /* Kecilkan font lebih jauh */
+            letter-spacing: 0.4px; /* Kurangi letter spacing lebih jauh */
             padding: 0 1rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin-top: 0.6rem; /* Kurangi margin atas lebih jauh */
+            margin-bottom: 0.2rem; /* Kurangi margin bawah lebih jauh */
             white-space: nowrap;
             opacity: 1;
             transition: opacity 0.2s;
@@ -210,7 +217,7 @@
             padding: 2rem;
             min-height: 100vh;
             transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding-top: calc(var(--header-height) + 2rem);
+            padding-top: calc(var(--header-height) + 2rem); /* Nilai default sebelumnya */
         }
 
         body.sidebar-collapsed .main-content {

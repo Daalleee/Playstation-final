@@ -37,7 +37,7 @@
                         <p class="text-muted">{{ Auth::user()->email }}</p>
                         
                         <!-- Test Button -->
-                        <button type="button" class="btn btn-sm btn-outline-info mt-2" data-bs-toggle="modal" data-bs-target="#previewModal">
+                        <button type="button" class="btn btn-sm btn-primary mt-2" style="background-color: #0652DD; border-color: #0652DD;" onmouseover="this.style.backgroundColor='#032a8a';" onmouseout="this.style.backgroundColor='#0652DD';" data-bs-toggle="modal" data-bs-target="#previewModal">
                             <i class="bi bi-eye-fill me-1"></i> Preview Foto
                         </button>
                     </div>

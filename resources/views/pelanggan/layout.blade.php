@@ -225,6 +225,12 @@
     .tooltip.bs-tooltip-end .tooltip-arrow::before {
         border-right-color: #FFFFFF; /* Putih Utama */
     }
+
+    /* Mengatur lebar konten agar tetap seimbang dengan sidebar yang lebih ramping */
+    .main-content {
+        padding: 2rem; /* Kembali ke padding normal */
+    }
+
 </style>
 @endpush
 
@@ -246,7 +252,7 @@
         // Optional: Disable tooltips when sidebar is expanded (if desired)
         const body = document.body;
         const sidebar = document.getElementById('sidebar');
-        
+
         function updateTooltips() {
             if (body.classList.contains('sidebar-collapsed')) {
                 tooltipList.forEach(t => t.enable());
@@ -266,6 +272,7 @@
                 setTimeout(updateTooltips, 50);
             });
         }
+
     });
 </script>
 @endpush
